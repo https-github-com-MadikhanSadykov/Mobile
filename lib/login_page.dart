@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart';
+import 'constants.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -59,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
         style: TextStyle(color: Colors.red, fontSize: 20),
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-          fillColor: Colors.amber,
+          fillColor: kFirstColor,
           filled: true,
           labelStyle: TextStyle(color: Colors.black),
           // borderRadius: BorderRadius(),
@@ -75,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
         decoration: InputDecoration(
           labelText: "Password",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-          fillColor: Colors.amber,
+          fillColor: kFirstColor,
           filled: true,
           labelStyle: TextStyle(color: Colors.black),
         ),
@@ -85,7 +87,12 @@ class _LoginPageState extends State<LoginPage> {
       RaisedButton(
         child: Text("Login", style: TextStyle(fontSize: 20),),
         onPressed: () {
-          print("1");
+          username = _usernameController.text;
+          password = _passwordController.text;
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) =>
+                  HomePage(username,password)));
+          // print();
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
