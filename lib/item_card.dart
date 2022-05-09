@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'product.dart';
+import 'product_model.dart';
 
 import '../../../constants.dart';
 
@@ -14,6 +14,7 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: press,
       child: Column(
@@ -22,10 +23,6 @@ class ItemCard extends StatelessWidget {
           Expanded(
             child: Container(
               padding: EdgeInsets.all(kDefaultPaddin),
-              // For  demo we use fixed height  and width
-              // Now we dont need them
-              // height: 180,
-              // width: 160,
               decoration: BoxDecoration(
                 color: product.color,
                 borderRadius: BorderRadius.circular(16),
@@ -33,6 +30,7 @@ class ItemCard extends StatelessWidget {
               child: Hero(
                 tag: "${product.id}",
                 child: new Image.asset(product.image),
+                // child:Text("uhkasd"),
               ),
             ),
           ),

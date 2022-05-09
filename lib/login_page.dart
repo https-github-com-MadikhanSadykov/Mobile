@@ -19,44 +19,51 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.blue,
-        body: Stack(
+        body: Stack(children: <Widget>[
+          Center(
+              child: ListView(
+            scrollDirection: Axis.vertical,
             children: <Widget>[
+              const SizedBox(
+                height: 20,
+              ),
               Center(
-                  child: ListView(
-                    scrollDirection: Axis.vertical,
-                    children: <Widget>[
-                      const SizedBox(height: 20,),
-                      Center(child: Text(
-                        "Login", style: TextStyle(fontSize: 30),)),
-                      const SizedBox(height: 30,),
-                      Padding(padding: EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 15), child: buildUsername()),
-                      const SizedBox(height: 15,),
-                      Padding(padding: EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 15), child: buildPassword()),
-                      const SizedBox(height: 15,),
-                      Padding(padding: EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 90), child: buildSubmit()),
-
-                    ],
-                  )
+                  child: Text(
+                "Login",
+                style: TextStyle(fontSize: 30),
+              )),
+              const SizedBox(
+                height: 30,
               ),
               Padding(
-                  padding: EdgeInsets.fromLTRB(5, 30, 0, 0),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )
-              )
-            ]
-        )
-    );
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                  child: buildUsername()),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                  child: buildPassword()),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 90),
+                  child: buildSubmit()),
+            ],
+          )),
+          Padding(
+              padding: EdgeInsets.fromLTRB(5, 30, 0, 0),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ))
+        ]));
   }
 
-  Widget buildUsername() =>
-      TextFormField(
+  Widget buildUsername() => TextFormField(
         controller: _usernameController,
         style: TextStyle(color: Colors.red, fontSize: 20),
         decoration: InputDecoration(
@@ -66,12 +73,10 @@ class _LoginPageState extends State<LoginPage> {
           labelStyle: TextStyle(color: Colors.black),
           // borderRadius: BorderRadius(),
           labelText: "Username",
-
         ),
       );
 
-  Widget buildPassword() =>
-      TextFormField(
+  Widget buildPassword() => TextFormField(
         controller: _passwordController,
         style: TextStyle(fontSize: 20),
         decoration: InputDecoration(
@@ -83,25 +88,34 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-  Widget buildSubmit() =>
-      RaisedButton(
-        child: Text("Login", style: TextStyle(fontSize: 20),),
+  Widget buildSubmit() => RaisedButton(
+        child: Text(
+          "Login",
+          style: TextStyle(fontSize: 20),
+        ),
         onPressed: () {
           username = _usernameController.text;
           password = _passwordController.text;
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) =>
-                  HomePage(username,password)));
+          // Navigator.of(context).pushReplacement(MaterialPageRoute(
+          //     builder: (context) =>
+          //         HomePage(username,password)));
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage(username, password)),
+                (Route<dynamic> route) => false,
+          );
+          // Navigator.pushAndRemoveUntil(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => HomePage(username, password),
+          //           (Route<dynamic> route) => false,
+          //
+          //     ));
           // print();
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
-
         ),
         color: Colors.teal,
-
-
       );
-
-
 }
